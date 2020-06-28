@@ -10,6 +10,8 @@ Nesse projeto o banco de dados é atualizado através de uma rotina inicial que 
 # Processo
 A requisição de scritps deve ser simples, com uma interface em que você escolha o projeto qual ele pertencera e a branch que vai ser incluído, e ele te retorne o numero e a versão do script
 
+Para visualizar [Instale esta extensão](https://chrome.google.com/webstore/detail/github-+-mermaid/goiiopgdnkogdbjmncgedmgpoajilohe)
+
 ```mermaid
 sequenceDiagram
 Usuario-->>+WEB: Request new script {project, branch}
@@ -25,4 +27,3 @@ WEB-->>-Usuario:
  - Node
  - MongoDB
  - Typescript
- 
