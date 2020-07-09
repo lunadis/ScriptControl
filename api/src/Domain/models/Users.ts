@@ -1,8 +1,8 @@
-interface User{
+interface Users{
     id: number,
     userName: string,
 }
 
 export{
-    User
+    Users
 }
