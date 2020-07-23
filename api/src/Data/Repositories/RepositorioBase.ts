@@ -1,5 +1,6 @@
 import IRepositorieBase from "../../Domain/Repositories/IRepositorieBase";
 import Knex from "knex";
+import db from "../DbCon";
 
 class RepositorioBase<T> implements IRepositorieBase<T>{
 

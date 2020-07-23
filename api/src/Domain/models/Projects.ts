@@ -4,6 +4,12 @@ interface Projects{
     template: string,
 }
 
+interface ProjetoTeste{
+    id: number
+}
+
+
 export {
-    Projects
+    Projects,
+    ProjetoTeste
 }

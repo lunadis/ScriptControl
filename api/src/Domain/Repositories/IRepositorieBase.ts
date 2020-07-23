@@ -6,4 +6,5 @@ interface IRepositorieBase<T>{
     Index(): Array<T>
 }
 
+
 export default IRepositorieBase
