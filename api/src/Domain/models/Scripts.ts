@@ -1,5 +1,5 @@
 import { Projects } from './Projects'
-import { User } from './Users';
+import { Users } from './Users';
 
 
 interface Scripts {
@@ -7,7 +7,7 @@ interface Scripts {
     name: string,
     project: Projects
     content: string,
-    user: User
+    user: Users
 }
 
 
