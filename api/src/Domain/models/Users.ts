@@ -1,6 +1,6 @@
-interface Users{
-    id: number,
-    userName: string,
+class Users{
+    id!: number;
+    userName!: string;
 }
 
 export{

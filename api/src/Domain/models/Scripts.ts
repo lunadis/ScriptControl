@@ -2,15 +2,26 @@ import { Projects } from './Projects'
 import { Users } from './Users';
 
 
-interface Scripts {
-    id: number,
-    name: string,
-    project: Projects
+class Scripts {
+    id!: number
+    name!: string
+    project!: Projects
+    content!: string
+    user!: Users
+
+    constructor(){
+        
+    }
+}
+
+interface ScriptsViewModel{
+    project_id: number
     content: string,
-    user: Users
+    user_id: number
 }
 
 
 export {
-    Scripts
+    Scripts,
+    ScriptsViewModel
 }
