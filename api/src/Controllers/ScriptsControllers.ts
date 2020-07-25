@@ -26,7 +26,7 @@ class ScriptsControllers{
 
     async GetByID(req: Request, resp: Response){
         const id = Number(req.params.id)
-
+        
         return resp.status(200).json(id)
     }
 }

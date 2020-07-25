@@ -3,11 +3,11 @@ import path from 'path'
 module.exports = {
     client: 'mysql2',
     connection: {
-        host: 'demodaypalomadb.mysql.database.azure.com',
+        host: 'localhost',
         port: '3306',
         database: 'ScriptControl',
-        user:     'Pfiap@demodaypalomadb',
-        password: 'Paloma!@#$'
+        user:     'root',
+        password: '862411'
     },
     pool: {
         min: 2,
