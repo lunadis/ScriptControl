@@ -11,7 +11,14 @@ class ProjectsRepository {
     }
 
     async GetById(id: number): Promise<Projects | undefined>{
-        return await Knex<Projects>(this.table).select('*').where('id', '=', id).first();
+        return await Knex<Projects>(this.table).select('*').where('id', '=', id).first()
+    }
+
+    async Update(projects: Projects): Promise<Projects | undefined>{
+        const trx = await Knex.transaction()
+        const persistedId = await trx(this.table).update(projects)
+        await trx.commit()
+        return await this.GetById(projects.id)
     }
 
 

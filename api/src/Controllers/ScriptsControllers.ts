@@ -1,32 +1,48 @@
 import { Request, Response } from 'express'
 import ProjectsRepository from '../Data/Repositorys/ProjectsRepoitory'
-import { Scripts, ScriptsViewModel } from '../Domain/models/Scripts'
+import { Scripts, ScriptsViewModel, ScriptModel, } from '../Domain/models/Scripts'
 import UserRepository from '../Data/Repositorys/UserRepository'
+import ScriptRepository from '../Data/Repositorys/SciptsRepository'
 
 
-class ScriptsControllers{
-    async Create(req: Request, resp: Response){
-        const script: ScriptsViewModel  = req.body
+class ScriptsControllers {
+    async Create(req: Request, resp: Response) {
+        const script: ScriptsViewModel = req.body
         const project = await new ProjectsRepository().GetById(script.project_id)
-        if(!project) return resp.status(404)
-            
+        const user = await new UserRepository().GetById(script.user_id)
+        if (!project || !user) return resp.status(404)
+
         const lastScript = project.lastScript + 1
 
         project.lastScript = lastScript
-
-        const scriptToSave:Scripts = new Scripts()
-
+        const scriptToSave: Scripts = new Scripts()
+        
         scriptToSave.user = await new UserRepository().GetById(script.user_id)
         scriptToSave.project = project
         scriptToSave.name = project.template + lastScript
+        scriptToSave.content = script.content
+        
+        
+        console.log({project, scriptToSave})
 
-        return resp.status(200).json(scriptToSave)
+        var scriptCreated = await new ScriptRepository()
+        .Create(new ScriptModel(
+            scriptToSave.name,
+            project.id,
+            scriptToSave.content,
+            user.id
+        ))
+        var projectSave = await new ProjectsRepository().Update(project)
+
+        console.log({scriptCreated, projectSave})
+
+        return resp.status(200).json(scriptCreated)
     }
 
 
-    async GetByID(req: Request, resp: Response){
+    async GetByID(req: Request, resp: Response) {
         const id = Number(req.params.id)
-        
+
         return resp.status(200).json(id)
     }
 }

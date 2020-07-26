@@ -20,8 +20,23 @@ interface ScriptsViewModel{
     user_id: number
 }
 
+class ScriptModel{
+    name!: string
+    project_id!: number
+    content!: string
+    user_id!: number
+
+    constructor(name: string, projectId: number, content: string, user_id: number){
+        this.name = name;
+        this.content = content;
+        this.user_id = user_id
+        this.project_id = projectId
+    }
+}
+
 
 export {
     Scripts,
-    ScriptsViewModel
+    ScriptsViewModel,
+    ScriptModel
 }

@@ -12,7 +12,7 @@ class UserRepository {
     }
 
     async GetById(id: number): Promise<Users>{
-        const user =  await Knex<Users>(this.table).select('*').where('id', '=', id).first();
+        const user =  await Knex<Users>(this.table).select('*').where('id', '=', id).first().timeout(15);
 
         if(!user){
             const userNull: Users =  new Users()
