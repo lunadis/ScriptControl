@@ -8,7 +8,7 @@ export class ProjectRepository implements IProjectRepository{
 
     async Update(project: ProjectModel): Promise<void> {
         const trx = await Knex.transaction();
-        await trx(this.table).update(project);
+        await trx(this.table).update({lastScript: project.lastScript}).where('id', project.id);
         trx.commit();        
     }
 
@@ -19,5 +19,7 @@ export class ProjectRepository implements IProjectRepository{
     async Select(id: string): Promise<ProjectModel> {
         return await Knex(this.table).select("*").where('id', id).first();
     }
+
+    
 
 }
