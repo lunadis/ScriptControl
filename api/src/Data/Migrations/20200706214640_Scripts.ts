@@ -5,6 +5,7 @@ export async function up(knex: Knex): Promise<any> {
     return knex.schema.createTable("scripts", table =>{
         table.increments("id").primary()
         table.string("name", 100).unique()
+        table.text("content")
         table.integer("user_id")
              .unsigned()
              .references("id")

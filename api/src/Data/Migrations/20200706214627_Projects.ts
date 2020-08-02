@@ -6,14 +6,9 @@ export async function up(knex: Knex): Promise<any> {
         table.increments("id").primary()
         table.string("name", 100).notNullable()
         table.string("template", 100).notNullable()
+        table.integer("lastScript").unsigned()
     })
 }
-
-// id: number,
-// name: string,
-// template: string,
-// }
-
 
 export async function down(knex: Knex): Promise<any> {
     return knex.schema.dropTable("Projects")
