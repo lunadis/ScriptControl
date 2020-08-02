@@ -8,23 +8,20 @@ import ScriptRepository from '../Data/Repositorys/SciptsRepository'
 class ScriptsControllers {
     async Create(req: Request, resp: Response) {
         const script: ScriptsViewModel = req.body
+
         const project = await new ProjectsRepository().GetById(script.project_id)
         const user = await new UserRepository().GetById(script.user_id)
-        if (!project || !user) return resp.status(404)
-
+        if (!project.name == null || !user.userName == null) return resp.status(404)
+        console.log({user, project})
         const lastScript = project.lastScript + 1
-
         project.lastScript = lastScript
-        const scriptToSave: Scripts = new Scripts()
         
+        const scriptToSave: Scripts = new Scripts()
+
         scriptToSave.user = await new UserRepository().GetById(script.user_id)
         scriptToSave.project = project
         scriptToSave.name = project.template + lastScript
         scriptToSave.content = script.content
-        
-        
-        console.log({project, scriptToSave})
-
         var scriptCreated = await new ScriptRepository()
         .Create(new ScriptModel(
             scriptToSave.name,
@@ -34,7 +31,6 @@ class ScriptsControllers {
         ))
         var projectSave = await new ProjectsRepository().Update(project)
 
-        console.log({scriptCreated, projectSave})
 
         return resp.status(200).json(scriptCreated)
     }
