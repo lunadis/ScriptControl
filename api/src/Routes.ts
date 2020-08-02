@@ -1,21 +1,17 @@
 import express from 'express'
-import ProjectControllers from './Controllers/ProjectControllers';
-import UserControllers from './Controllers/UserControllers';
-import ScriptsControllers from './Controllers/ScriptsControllers';
+import { ScriptController } from './Controller/ScriptController';
+import { ProjectController } from './Controller/ProjectController';
+import { UserController } from './Controller/UserController';
 const routes = express.Router();
 
-const ProjectController = new ProjectControllers()
-const userControllers = new UserControllers()
-const scriptController = new ScriptsControllers()
+var ScriptsController = new ScriptController();
+var projectController = new ProjectController();
+var userController = new UserController()
 
-
-
-routes.get("/projects/:id", ProjectController.GetByID)
-routes.get("/projects", ProjectController.index)
-routes.get("/User/:id", userControllers.GetByID)
-routes.get("/User", userControllers.index)
-routes.post("/Script", scriptController.Create)
-
-
+routes.post('/scripts/create', ScriptsController.Create)
+routes.get('/projects', projectController.Index)
+routes.get('/projects/:id', projectController.Select)
+routes.get('/user', userController.Index)
+routes.get('/user/:id', userController.Select)
 
 export default routes

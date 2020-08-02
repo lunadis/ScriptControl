@@ -1,28 +1,15 @@
-import Knex from '../DbCon'
-import { Users } from '../../Domain/models/Users';
-import { Scripts } from '../../Domain/models/Scripts';
+import Knex from "../DbCon";
+import { UserModel } from "../../Domain/Model/UserModel";
+import { IUserRepository } from "../../Domain/Interfaces/Repository/IUserRepository";
 
+export class UserRepository implements IUserRepository{
+    private readonly table: string = "user"
 
-class UserRepository {
-
-    table:string = 'user'
-
-    async index(): Promise<Users[]> {
-        return await Knex<Users>(this.table).select("*")
+    async Index(): Promise<UserModel[]> {
+        return await Knex(this.table).select('*')
     }
-
-    async GetById(id: number): Promise<Users>{
-        const user =  await Knex<Users>(this.table).select('*').where('id', '=', id).first()
-
-        if(!user){
-            const userNull: Users =  new Users()
-            return userNull;
-        }
-
-        return user
+    async Select(id: string): Promise<UserModel> {
+        return await Knex(this.table).select("*").where('id', id).first();
     }
 
 }
-
-
-export default UserRepository

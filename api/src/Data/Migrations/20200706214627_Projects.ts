@@ -10,12 +10,6 @@ export async function up(knex: Knex): Promise<any> {
     })
 }
 
-// id: number,
-// name: string,
-// template: string,
-// }
-
-
 export async function down(knex: Knex): Promise<any> {
     return knex.schema.dropTable("Projects")
 }
